@@ -229,7 +229,7 @@ class Droomrobot:
             if reply.response.query_result.query_text:
                 print(f'transcript is {reply.response.query_result.query_text}')
                 gpt_response = self.gpt.request(
-                    GPTRequest(f'Je bent een sociale robot die praat met een kind tussen de 6 en 9 jaar oud. '
+                    GPTRequest(f'Je bent een sociale robot die praat met een kind tussen de 9 en 12 jaar oud. '
                                f'De robot stelt een vraag over een interesse van het kind.'
                                f'Jouw taak is om de mening van het kind er uit te filteren'
                                f'Bijvoorbeeld bij de vraag: "hoe goed is het gegaan?" '
@@ -263,7 +263,7 @@ class Droomrobot:
             if reply.response.query_result.query_text:
                 print(f'transcript is {reply.response.query_result.query_text}')
                 gpt_response = self.gpt.request(
-                    GPTRequest(f'Je bent een sociale robot die praat met een kind tussen de 6 en 9 jaar oud. '
+                    GPTRequest(f'Je bent een sociale robot die praat met een kind tussen de 9 en 12 jaar oud. '
                                f'De robot stelt een vraag over een interesse van het kind.'
                                f'Jouw taak is om de key entity er uit te filteren'
                                f'Bijvoorbeeld bij de vraag: "wat is je lievelingsdier?" '
@@ -319,28 +319,32 @@ class Droomrobot:
         self.say(f'{child_name}, wat een leuke naam.')
         self.say('En hoe oud ben je?')
         sleep(3)
-        self.say(f'{str(child_age)} jaar. Oh wat goed, dan ben je al oud genoeg om mijn speciale trucje te leren.')
-        self.say('Ik heb namelijk een truukje dat bij heel veel kinderen goed werkt om alles in het ziekenhuis makkelijker te maken.')
+        self.say(f'{str(child_age)} jaar. Oh wat goed, dan kan ik je een truukje leren om alles in het ziekenhuis makkelijker te maken.')
+        self.say('Dat truukje werkt bij veel kinderen heel goed.')
         self.say('Ik ben benieuwd hoe goed het bij jou gaat werken.')
-        self.say('Mijn trucje is dat je gaat luisteren naar een bijzonder verhaal.')
-        self.say('Het is een soort droom reis die jou helpt om je nu en straks fijn, rustig en sterk te voelen.')
-        self.say('We gaan het verhaal van jouw droomreis samen maken zodat het precies bij jou past, want dan werkt het het allerbeste.')
-        self.say('Nu ga ik je wat meer vertellen over het trucje wat ik kan.')
-        self.say('Let maar goed op, ik ga je iets bijzonders leren. Het heet een droomreis.')
-        self.say('Met een droomreis kun je aan iets fijns denken terwijl je hier in het ziekenhuis bent.')
+        self.say('Jij kunt namelijk heel makkelijk jezelf helpen in het ziekenhuis door je lichaam en hoofd te ontspannen.')
+        self.say('Ik ga je wat meer vertellen over het truukje wat ik kan.')
+        self.say('Let maar goed op, dan kan jij het ook leren.')
+        self.say('We gaan samen een reis maken in je fantasie wat ervoor zorgt dat jij je fijn, rustig en sterk voelt.')
+        self.say('Met je fantasie kun je aan iets fijns denken terwijl je hier bent, als een soort droom.')
         self.say('Ik zal het trucje even voor doen.')
         self.say('Ik ga in mijn droomreis het liefst in gedachten naar de wolken.')
         # self.say('Kijk maar eens in mijn ogen, daar zie je wat ik bedoel.') 
         # self.say('Cool hé')
-        self.say('Je kan van alles bedenken.')
-        self.say('Je kan bijvoorbeeld in gedachten met een raceauto racen, naar een waterpretpark, of als een dolfijn in de zee zwemmen?')
+        self.say('En wat nu zo handig is aan dit truukje is dat het je ook kan helpen met het sonde inbrengen.')
+
+        self.say('Door ergens anders aan te denken, zoals iets dat jij leuk vind, richt je je aandacht daarop in plaats van de sonde.')
+        self.say('Dat maakt het vaker minder ongemakkelijk, en kan het fijner laten voelen.')
+        self.say('Wat goed helpt is om je voor te stellen dat je in een raceauto door een tunnel scheurt, of van een waterglijvbaan gaat, of als dolfijn door het water beweegt.')
+        self.say('Welke lijkt jij het leukste?')
+        
 
         # droomplek = self.ask_entity('Wat zou jij willen doen? Je kan kiezen uit raceauto, waterpretpark of dolfijn.',
         #                             {'droom_plek': 1},
         #                             'droom_plek',
         #                             'droom_plek')
 
-        droomplek = self.ask_entity_llm('Wat zou jij willen doen?') ## wellicht "kies uit raceauto racen, naar een waterpretpark of als dolfijn in de zee zwemmen"
+        droomplek = self.ask_entity_llm('De waterglijvaan, de race-auto of dolfijn?') ## wellicht "kies uit raceauto racen, naar een waterpretpark of als dolfijn in de zee zwemmen"
 
         if droomplek:
             if 'raceauto' in droomplek:
@@ -357,27 +361,27 @@ class Droomrobot:
         droomplek_lidwoord = self.get_article(droomplek)
 
         # SAMEN OEFENEN
-        self.say('Laten we alvast gaan oefenen om samen een mooie droomreis te maken, zodat het je zometeen gaat helpen bij het sonde inbrengen.')
-        self.say('De sonde is een soort zacht rietje \pau=50\ die je gaat helpen om je goed te voelen.')
-        self.say('Ga even lekker zitten zoals jij dat fijn vindt.')
+        self.say('Laten we alvast gaan oefenen om samen een ontspannen reis te maken, zodat het je zometeen gaat helpen bij het inbrengen van de sonde.')
+        self.say('De sonde is een dun zacht buiksje dat heel makkelijk door je neus naar binnen kan om jou te helpen je beter te voelen.')
+        self.say('Ga even lekker zitten zoals jij dat prettig vindt.')
         sleep(1)
         zit_goed = self.ask_yesno("Zit je zo goed?")
         if 'yes' in zit_goed:
             self.say('En nu je lekker bent gaan zitten.')
         else:
-            self.say('Het zit vaak het lekkerste als je stevig gaat zitten.')
-            self.say('met beide benen op de grond.')
+            self.say('Het helpt vaak als je je benen een beetje ontspant.')
+            self.say('probeer maar een fijne houding te vinden.')
             sleep(1)
             self.say('Als je goed zit.')
         self.say('mag je je ogen dicht doen.')
-        self.say('dan werkt het truukje het beste.')
-        self.say('En terwijl je nu zo lekker zit, mag je je handen op je buik doen en rustig gaan ademhalen.')
+        self.say('dat maakt het makkelijker om je te concenteren.')
+        self.say('En terwijl je nu zo zit, leg je rustig je handen op je buik doen en adem je kalm in en uit.')
 
         self.say('Adem rustig in.')
         self.play_audio('resources/audio/breath_in.wav')
         self.say('en rustig uit.')
         self.play_audio('resources/audio/breath_out.wav')
-        self.say('En voel maar dat je buik iedere keer rustig omhoog en omlaag gaat als je zo lekker aan het ademhalen bent.')
+        self.say('Voel hoe je buik zachtjes op en neer beweegt bij iedere ademhaling.')
 
         if droomplek:
             if 'raceauto' in droomplek:
@@ -403,11 +407,11 @@ class Droomrobot:
         
         ## INTERVENTIE
         sleep(5)
-        self.say('Wat fijn dat ik je weer mag helpen, we gaan weer samen een droomreis maken.')
+        self.say('Wat fijn dat ik je weer mag helpen, we gaan weer samen een reis door je fantasie maken.')
         self.say('Omdat je net al zo goed hebt geoefend zul je zien dat het nu nog beter en makkelijker gaat.')
-        self.say('Je mag weer goed gaan zitten en je ogen dicht doen zodat deze droomreis nog beter voor jou werkt.')
+        self.say('Je mag weer goed gaan zitten en je ogen dicht doen zodat deze droomreis nog beter werkt.')
         self.say('Luister maar weer goed naar mijn stem en merk maar dat andere geluiden in het ziekenhuis veel stiller worden.')
-        self.say('Ga maar rustig ademen zoals je dat gewend bent.')
+        self.say('Ga maar rustig ademen zoals je dat gewend bent, met je handen op je buik.')
 
         self.say('Adem rustig in.')
         self.play_audio('resources/audio/breath_in.wav')

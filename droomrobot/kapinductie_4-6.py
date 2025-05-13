@@ -230,7 +230,7 @@ class Droomrobot:
             if reply.response.query_result.query_text:
                 print(f'transcript is {reply.response.query_result.query_text}')
                 gpt_response = self.gpt.request(
-                    GPTRequest(f'Je bent een sociale robot die praat met een kind tussen de 6 en 9 jaar oud. '
+                    GPTRequest(f'Je bent een sociale robot die praat met een kind tussen de 4 en 6 jaar oud. '
                                f'De robot stelt een vraag over een interesse van het kind.'
                                f'Jouw taak is om de key entity er uit te filteren'
                                f'Bijvoorbeeld bij de vraag: "wat is je lievelingsdier?" '
@@ -264,7 +264,7 @@ class Droomrobot:
             if reply.response.query_result.query_text:
                 print(f'transcript is {reply.response.query_result.query_text}')
                 gpt_response = self.gpt.request(
-                    GPTRequest(f'Je bent een sociale robot die praat met een kind tussen de 6 en 9 jaar oud. '
+                    GPTRequest(f'Je bent een sociale robot die praat met een kind tussen de 4 en 6 jaar oud. '
                                f'De robot stelt een vraag over een interesse van het kind.'
                                f'Jouw taak is om de mening van het kind er uit te filteren'
                                f'Bijvoorbeeld bij de vraag: "hoe goed is het gegaan?" '
@@ -310,7 +310,7 @@ class Droomrobot:
 
 
 
-    def run(self, child_name: str, child_age: int, robot_name: str="de droomrobot"):
+    def run(self, child_name: str, child_age: int, robot_name: str="Hero"):
 
         # INTRODUCTIE
         self.say(f'Hallo, ik ben {robot_name} de droomrobot!')
@@ -321,21 +321,16 @@ class Droomrobot:
         self.say('En hoe oud ben je?')
         sleep(3)
         self.say(f'{str(child_age)} jaar. Oh wat goed, dan ben je al oud genoeg om mijn speciale trucje te leren.')
-        self.say('Ik heb namelijk een truukje dat bij heel veel kinderen goed werkt om alles in het ziekenhuis makkelijker te maken.')
-        self.say('Bijvoorbeeld als je gaat slapen bij de slaapdokter.')
+        self.say('het is een truukje dat kinderen helpt om zich fijn en sterk te voelen in het ziekenhuis.')
         self.say('Ik ben benieuwd hoe goed het bij jou gaat werken.')
-        self.say('Mijn trucje is dat je gaat luisteren naar een bijzonder verhaal.')
-        self.say('Het is een soort droom reis die jou helpt om je nu en straks fijn, rustig en sterk te voelen.')
-        self.say('We gaan het verhaal van jouw droomreis samen maken zodat het precies bij jou past, want dan werkt het het allerbeste.')
-        self.say('Nu ga ik je wat meer vertellen over het trucje wat ik kan.')
-        self.say('Met een droomreis kun je aan iets fijns denken terwijl je hier in het ziekenhuis bent.')
-        self.say('Ik zal het trucje even voor doen.')
-        self.say('Ik ga in mijn droomreis het liefst in gedachten naar de wolken.')
-        # self.say('Kijk maar eens in mijn ogen, daar zie je wat ik bedoel.')
-        # self.say('Cool hé.')
-        self.say('Maar het hoeft niet de wolken te zijn. Iedereen heeft een eigen fijne plek.')
-        self.say('Laten we nu samen bedenken wat jouw fijne plek is.')
-        self.say('Je kan bijvoorbeeld in gedachten naar het strand, het bos of de ruimte.')
+        self.say('We gaan samen iets leuks bedenken dat jou gaat helpen.')
+        self.say('Nu ga ik je wat meer vertellen over het truukje wat ik kan.')
+        self.say('Let maar goed op, ik ga je iets bijzonders leren.')
+        self.say('Ik kan jou meenemen op een droomreis!')
+        self.say('Een droomreis is een truukje waarbij je aan iets heel leuks denkt.')
+        self.say('Dat helpt je om rustig en sterk te blijven.')
+        self.say('jij mag kiezen waar je heen wilt in gedachten.')
+        self.say('Je kan kiezen uit het strand, het bos of de ruimte.')
 
         # droomplek = self.ask_entity('Wat is een plek waar jij je fijn voelt? Het strand, het bos, de speeltuin of de ruimte?',
         #                             {'droom_plek': 1},
@@ -343,7 +338,7 @@ class Droomrobot:
         #                             'droom_plek')
         # self.mini.animation.request(MiniActionRequest("018"))
 
-        droomplek = self.ask_entity_llm('Wat is een plek waar jij je fijn voelt?')
+        droomplek = self.ask_entity_llm('Waar wil je naartoe?')
 
         if droomplek:
             if 'strand' in droomplek:
@@ -354,32 +349,32 @@ class Droomrobot:
                 self.ruimte(child_name, child_age)
             # else:
             #     self.nieuwe_droomplek(droomplek, child_name, child_age)
-            else:
-                droomplek = 'strand'  # default
-                self.droomplek_not_recognized(child_name, child_age)
+        else:
+            droomplek = 'strand'  # default
+            self.droomplek_not_recognized(child_name, child_age)
         droomplek_lidwoord = self.get_article(droomplek)
 
         # SAMEN OEFENEN
-        self.say('Laten we alvast gaan oefenen om samen een mooie droomreis te maken, zodat het je zometeen gaat helpen bij de slaapdokter.')
+        self.say('Laten we samen gaan oefenen.')
         self.say('Ga even lekker zitten zoals jij dat fijn vindt.')
         sleep(1)
         zit_goed = self.ask_yesno("Zit je zo goed?")
         if 'yes' in zit_goed:
             self.say('En nu je lekker bent gaan zitten.')
         else:
-            self.say('Het zit vaak het lekkerste als je stevig gaat zitten.')
-            self.say('met beide benen op de grond.')
+            self.say('Het zit vaak het lekkerste als je je benen lekker slap maakt, net als spaghetti.')
+            self.say('ga maar eens kijke hoe goed dat zit.')
             sleep(1)
-            self.say('Als je goed zit.')
+            self.say('als je goed zit.')
         self.say('mag je je ogen dicht doen.')
         self.say('dan werkt het truukje het beste.')
-        self.say('En terwijl je nu zo lekker zit mag je je handen op je buik doen en rustig gaan ademhalen')
+        self.say('leg nu je handen op je buik.')
 
         self.say('Adem rustig in.')
         self.play_audio('resources/audio/breath_in.wav')
         self.say('en rustig uit.')
         self.play_audio('resources/audio/breath_out.wav')
-        self.say('En voel maar dat je buik en je handen iedere keer rustig omhoog en omlaag gaan terwijl je zo lekker aan het ademhalen bent.')
+        self.say('En voel maar dat je buik rustig op en neer beweegt.')
 
         if droomplek:
             if 'strand' in droomplek:
@@ -389,22 +384,25 @@ class Droomrobot:
             elif 'ruimte' in droomplek:
                 self.ruimte_oefenen(child_name, child_age)
 
-        self.say('En wat zo fijn is, is dat je iedere keer als je deze droomreis nodig hebt, je weer terug kan gaan in gedachten naar deze fijne plek.')
-        self.say('Je hoeft alleen maar een paar keer diep in en uit te ademen. Ik ben benieuwd hoe goed dit je zometeen gaat helpen.')
-        self.say('Nu je genoeg geoefend hebt mag je je ogen weer lekker opendoen.')
-        self.say(f'Wanneer je zometeen aan de beurt bent ga ik je helpen om weer naar {droomplek_lidwoord} {droomplek} te gaan in gedachten. Je hebt super goed geoefend, dus je kan verrast zijn hoe goed het zometeen gaat!')
+        self.say('Weet je wat zo fijn is? Je kunt altijd teruggaan naar deze mooie plekken in je hoofd.')
+        self.say('Je hoeft alleen maar rustig in en uit te ademen.')
+        self.say('Ik ben benieuwd hoe goed dit je zometeen gaat helpen.')
+        self.say('als je klaar bent, mag je je ogen weer open doen.')
+        self.say(f'Straks ga ik je helpen om weer terug te gaan naar {droomplek_lidwoord} {droomplek} te gaan in gedachten. Je hebt super goed geoefend, dus je kan verrast zijn hoe goed het zometeen gaat!')
 
         ### INTERVENTIE
         sleep(5)
-        self.say('Wat fijn dat ik je weer mag helpen, we gaan weer samen een droomreis maken.')
-        self.say('Omdat je net al zo goed hebt geoefend, zul je zien dat het nu nog beter en makkelijker gaat.')
-        self.say('Je mag weer goed gaan zitten en je ogen dicht doen zodat deze droomreis nog beter voor jou werkt.')
+        self.say('Wat fijn dat ik je  mag helpen, we gaan weer samen op een mooie droomreis.')
+        self.say('Omdat je net al zo goed hebt geoefend, zal het nu nog makkelijker gaan.')
+        self.say('Ga maar lekker zitten zoals jij dat fijn vindt.')
         sleep(1)
-        self.say('Luister maar weer goed naar mijn stem en merk maar dat andere geluiden in het ziekenhuis veel stiller worden.')
-        self.say('Ga maar rustig ademen zoals je dat gewend bent.')
-        self.say('Adem rustig in.')
+        self.say('Sluit je ogen maar, dan werkt de droomreis het allerbeste en kan je in gedachten op reis gaan.')
+        self.say('En je mag ze altijd even op doen en als je wilt weer dicht.')
+        self.say('Luister goed naar mijn stem, en merk maar dat alle andere geluiden in het ziekenhuis steeds zachter worden.')
+        self.say('Leg je handen op je buik.')
+        self.say('en adem heel goed in.')
         self.play_audio('resources/audio/breath_in.wav')
-        self.say('en rustig uit.')
+        self.say('en weer heel goed uit.')
         self.play_audio('resources/audio/breath_out.wav')
 
         if droomplek:
@@ -417,6 +415,7 @@ class Droomrobot:
 
         ### AFSCHEID
         ## geen afscheid want het kind slaapt?
+      '''
         self.say('Wat heb je jezelf goed geholpen om alles makkelijker te maken.')
         ging_goed = self.ask_opinion_llm("Hoe goed is het gegaan?")
         if 'positive' in ging_goed:
@@ -430,23 +429,23 @@ class Droomrobot:
         self.say('Je kunt dit ook zonder mij oefenen.')
         self.say('Je hoeft alleen maar je ogen dicht te doen en terug te denken aan jouw plek in gedachten.')
         self.say('Ik ben benieuwd hoe goed je het de volgende keer gaat doen. Je doet het op jouw eigen manier, en dat is precies goed.')
-
+        '''
 
 
     def strand(self, child_name: str, child_age: int):
-        self.say('Ah, het strand! Ik kan de golven bijna horen en het zand onder mijn voeten voelen.')
-        self.say('Weet je wat ik daar graag doe? Een zandkasteel bouwen met een vlag er op.')
+        self.say('Wat is het fijn op het strand, Ik voel het warme zand en hoor de golven zachtjes ruisen.')
+        self.say('Weet je wat ik daar graag doe? Grote zandkastelen bouwen en schelpjes zoeken.')
         motivation = self.ask_open(f'Wat zou jij daar willen doen {child_name}?')
         if motivation:
             personalized_response = self.personalize('Wat zou jij op het strand willen doen?', child_age, motivation)
             self.say(personalized_response)
         else:
-            self.say("Je kan van alles doen op het strand he! Zo fijn.")
+            self.say("Er is zoveel leuks te doen op het strand.")
 
 
     def bos(self, child_name: str, child_age: int):
-        self.say('Het bos, wat een rustige plek! Ik hou van de hoge bomen en het zachte mos op de grond.')
-        self.say('Weet je wat ik daar graag doe? Ik zoek naar dieren die zich verstoppen, zoals vogels of eekhoorns.')
+        self.say('Het bos, wat een rustige plek! De bomen zijn hoog en soms hoor ik de vogeltjes fluiten.')
+        self.say('Weet je wat ik daar graag doe? Takjes verzamelen en speuren naar eekhoorntjes.')
         motivation = self.ask_open(f'Wat zou jij daar willen doen {child_name}?')
         if motivation:
             personalized_response = self.personalize('Wat zou jij in het bos willen doen?', child_age, motivation)
@@ -455,9 +454,9 @@ class Droomrobot:
             self.say("Je kan van alles doen in het bos, zo fijn.")
 
     def ruimte(self, child_name: str, child_age: int):
-        self.say('De ruimte, wat een avontuurlijke plek! Ik stel me voor dat ik in een raket zit en langs de sterren vlieg.')
-        self.say('Weet je wat ik daar graag zou doen? Zwaaien naar de planeten en zoeken naar aliens die willen spelen.')
-        motivation = self.ask_open(f'Wat zou jij in de ruimte willen doen {child_name}?')
+        self.say('De ruimte is heel bijzonder, ik stel me voor dat ik in een raket zit en langs de sterren vlieg.')
+        self.say('Weet je wat ik daar graag doe? Naar de planeten zwaaien en kijken of ik grappige mannetjes zie.')
+        motivation = self.ask_open('Wat zou jij willen doen in de ruimte?')
         if motivation:
             personalized_response = self.personalize('Wat zou jij in de ruimte willen doen?', child_age,
                                                      motivation)
@@ -496,16 +495,17 @@ class Droomrobot:
 
     def strand_oefenen(self, child_name: str, child_age: int):
         self.say('En terwijl je zo rustig aan het ademhalen bent mag je gaan voorstellen dat je op het strand bent.')
-        self.say('Kijk maar eens in gedachten om je heen wat je allemaal op die mooie plek ziet.')
-        self.say('Misschien ben je er alleen, of is er iemand bij je.')
+        self.say('Kijk maar in je hoofd om je heen. Wat zie je allemaal?')
+        self.say('Misschien zie je het zand, de zee of een mooie schelp.')
+        self.say('Ben je daar alleen, of is er iemand bij je?')
         self.say('Kijk maar welke mooie kleuren je allemaal om je heen ziet.')
-        self.say('Misschien wel groen of paars of regenboog kleuren.')
+        self.say('Misschien wel groen of paars of andere kleuren.')
         self.say('En merk maar hoe fijn jij je op deze plek voelt.')
         self.say('Luister maar lekker naar de golven van de zee.')
         self.play_audio('resources/audio/ocean_waves.wav')
-        self.say('Misschien is het er heerlijk warm of lekker koel. Voel de zonnestralen maar op je gezicht.')
-        self.say('En op deze plek kan je alles doen waar je zin in hebt.')
-        self.say('Misschien ga je een zandkaasteel bouwen, of spring je over de golven heen.')
+        self.say('Misschien voel je de warme zon op je gezicht, of is het een beetje koel.')
+        self.say('Hier kun je alles doen wat je leuk vindt.')
+        self.say('Misschien bouw je een groot zandkasteel, of spring je over de golven.')
         motivation = self.ask_open(f'Wat ga jij op het strand doen?')
         if motivation:
             personalized_response = self.personalize('Wat ga jij op het strand doen?', child_age,
@@ -516,51 +516,52 @@ class Droomrobot:
     def bos_oefenen(self, child_name: str, child_age: int):
         self.say('En terwijl je zo rustig aan het ademhalen bent, mag je gaan voorstellen dat je in een prachtig bos bent.')
         self.say('Kijk maar eens om je heen wat je allemaal op die mooie plek ziet.')
-        self.say('Misschien zie je grote bomen, of kleine bloemen die zachtjes in de wind bewegen.')
+        self.say('Misschien zie je hoe bomen, groene blaadjes of een klein diertje.')
         self.say('En merk maar hoe fijn jij je op deze plek voelt.')
-        self.say('Luister maar naar het geluid van de vogeltjes die fluiten.')
+        self.say('Luister maar naar de vogels die zingen.')
         self.play_audio('resources/audio/forest-sounds.wav')
-        self.say('Misschien is het er lekker fris, of voel je de zonnestralen door de bomen schijnen. Voel maar de zachte warmte op je gezicht.')
-        self.say('En op deze plek kun je alles doen waar je zin in hebt.')
-        self.say('Misschien ga je een boom beklimmen, of op zoek naar dieren.')
-        motivation = self.ask_open(f'Wat ga jij in het bos doen?')
+        self.say('Misschien voel je de frisse lucht, of schijnt de zon door de bomen op je gezicht.')
+        self.say('Hier kun je alles doen wat je leuk vindt.')
+        self.say('Misschien klim je in een boom, of zoek je naar dieren.')
+        motivation = self.ask_open(f'Wat ga jij doen in het bos?')
         if motivation:
             personalized_response = self.personalize('Wat ga jij in het bos doen?', child_age,
                                                      motivation)
             self.say(personalized_response)
-        self.say("Merk maar hoe fijn het is om dat daar te doen!")
+        self.say("Merk maar hoe fijn het is om dat te doen!")
     
     def ruimte_oefenen(self, child_name: str, child_age: int):
-        self.say('En terwijl je zo rustig aan het ademhalen bent, mag je gaan voorstellen dat je in de ruimte bent, hoog boven de aarde.')
+        self.say('En terwijl je zo rustig aan het ademhalen bent, mag je gaan voorstellen dat je in de ruimte bent, heel hoog in de lucht.')
         self.say('Misschien ben je er alleen, of is er iemand bij je.')
         self.say('Kijk maar eens om je heen, wat zie je daar allemaal?')
-        self.say('Misschien zie je de aarde heel klein worden, helemaal onder je, alsof je heel hoog in de lucht vliegt.')
+        self.say('Misschien zie je de aarde heel klein worden.')
         self.say('Misschien zie je sterren die heel fel schijnen, in verschillende kleuren.')
         self.say('Je voelt je heel rustig en veilig in de ruimte, want er is zoveel te ontdekken.')
-        self.say('De ruimte is eindeloos, vol met geheimen en wonderen.')
-        self.say('Misschien zie je wel regenbogen of ontdek je een speciale wereld.')
+        self.say('De ruimte is zo groot, vol met leuke plekken.')
+        self.say('Misschien zie je wel regenbogen of ontdek je een speciale ster met grappige dieren er op.')
         motivation = self.ask_open(f'Wat ga jij doen in de ruimte?')
         if motivation:
             personalized_response = self.personalize('Wat ga jij doen in de ruimte?', child_age,
                                                      motivation)
             self.say(personalized_response)
-        self.say("Misschien zie je sterren die heel fel schijnen, in verschillende kleuren.")
+        #self.say("Misschien zie je sterren die heel fel schijnen, in verschillende kleuren.")
         self.say('Oooooh, merk maar hoe fijn het is om dat daar te doen!')
 
     def strand_interventie(self, child_name: str, child_age: int):
         self.say('Stel je maar voor dat je weer op het strand bent, op die fijne plek.')
-        self.say('Kijk maar weer naar alle mooie kleuren die om je heen zijn en merk hoe fijn je je voelt op deze plek.')
+        self.say('Wat zie je daar allemaal? Misschien een grote zee en zacht zand.')
         self.say('Luister maar naar alle fijne geluiden op het strand.')
         self.play_audio('resources/sounds/ocean_waves.wav')
-        self.say('Het zand onder je voeten is heerlijk zacht.')
+        self.say('Voel het zand maar onder je voeten. Het is lekker zacht en warm.')
         self.say('Als je je tenen beweegt, voel je hoe lekker het zand voelt.')
         self.say('En terwijl je nu zo lekker op het strand bent, zie je een mooie schommel staan.')
-        self.say('Precies in de kleur die jij mooi vindt.')
-        self.say('Je mag naar de schommel toe gaan en lekker gaan schommelen.')
-        self.say('Voel maar hoe makkelijk de schommel met je mee beweegt, heen en weer, heen en weer.')
-        self.say('De schommel gaat precies zo hoog als dat jij het fijn vindt.')
-        self.say('Jij hebt namelijk alle controle.')
-        self.say('Het kan ook een lekker kriebellend gevoel in je buik geven.')
+        self.say('Die heeft precies jouw lievelingskleur.')
+        self.say('Je mag op de schommel gaan zitten.')
+        self.say('Voel maar hoe je zachtjes heen en weer gaat.')
+        self.say('Voel maar hoe makkelijk de schommel doet wat jij wil, heen en weer, heen en weer.')
+        self.say('De schommel gaat precies zo hoog als jij fijn vindt.')
+        self.say('Jij bent de baas.')
+        self.say('Het kan ook een lekker kriebelend gevoel in je buik geven.')
         self.say('En terwijl je zo lekker aan het schommelen bent, voel je de zachte warme wind op je gezicht.')
         self.say('Merk maar hoe lekker rustig je lichaam wordt en hoe veilig en fijn jij je voelt op het strand.')
         self.say('Je hoort de golven van de zee, terwijl je lekker blijft schommelen.')
@@ -570,17 +571,17 @@ class Droomrobot:
     
     def bos_interventie(self, child_name: str, child_age: int):
         self.say('Stel je maar voor dat je weer in het bos bent, op die fijne plek.')
-        self.say('Kijk maar weer naar alle mooie kleuren die om je heen zijn en merk hoe fijn je je voelt op deze plek.')
-        self.say('Luister maar naar alle fijne geluiden in het bos.')
+        self.say('Kijk maar weer naar alle mooie kleuren die om je heen zijn en hoe fijn je je voelt op deze plek.')
+        self.say('Luister maar naar alle rustige geluiden in het bos.')
         self.play_audio('resources/audio/forest-sounds.wav')
-        self.say('De grond onder je voeten is zacht en bedekt met een klein laagje mos.')
-        self.say('Voel maar hoe lekker het is om op deze plek te staan.')
-        self.say('En terwijl je nu zo lekker in het bos bent, zie je een mooie schommel tussen twee grote bomen hangen.')
-        self.say('Precies in de kleur die jij mooi vindt.')
-        self.say('Je mag naar de schommel toe gaan en lekker gaan schommelen.')
-        self.say('Voel maar hoe makkelijk de schommel met je mee beweegt, heen en weer, heen en weer.')
-        self.say('De schommel gaat precies zo hoog als dat jij het fijn vindt.')
-        self.say('Jij hebt namelijk alle controle.')
+        self.say('De grond onder je voeten is lekker zacht.')
+        self.say('Voel maar hoe fijn het is om hier te zijn.')
+        self.say('Kijk, daar hangt een schommel tussen de bomen.')
+        self.say('Het is precies jouw lievelingskleur.')
+        self.say('Je mag op de schommel gaan zitten. Voel maar hoe je zachtjes heen en weer gaat.')
+        self.say('Voel maar hoe makkelijk de schommel doet wat jij wil, heen en weer, heen en weer.')
+        self.say('De schommel gaat precies zo hoog als dat jij fijn vindt.')
+        self.say('Jij bent de baas.')
         self.say('Het kan ook een lekker kriebelend gevoel in je buik geven.')
         self.say('En terwijl je zo lekker aan het schommelen bent, voel je de frisse lucht op je gezicht.')
         self.say('Merk maar hoe lekker rustig je lichaam wordt en hoe veilig en fijn jij je voelt in het bos.')
@@ -590,18 +591,20 @@ class Droomrobot:
         self.say('Steeds lichter, steeds rustiger, helemaal ontspannen.')
         
     def ruimte_interventie(self, child_name: str, child_age: int):
-        self.say('Stel je maar voor dat je weer in de ruimte bent, boven de aarde, omgeven door de sterren.')
-        self.say('Kijk maar naar de sterren die glinsteren, voel maar hoe rustig het is in deze uitgestrekte ruimte.')
-        self.say('Luister naar het zachte geluid van je ademhaling en de stilte om je heen.')
-        self.say('Je mag naar het ruimteschip toe zweven en er lekker in gaan zitten.')
+        self.say('Stel je maar voor dat je weer in de ruimte bent, heel hoog in de lucht.')
+        self.say('Wat zie je daar allemaal? Misschien sterren die twinkelen en planeten in mooie kleuren.')
+        self.say('Voel maar hoe rustig het is om hier te zweven.')
+        self.say('Kijk daar is een ruimteschip! Je mag erin gaan zitten.')
+        self.say('Het voelt zacht en veilig. Jij bent de baas.')
+        self.say('Het ruimteschip zweeft langzaam met je mee.')
         self.say('In het ruimteschip krijg je een ruimtekapje op.')
         self.say('Het voelt heerlijk zacht tegen je gezicht en het zal je beschermen.')
         self.say('Het houdt je helemaal veilig, zodat je nergens anders aan hoeft te denken dan aan je avontuur in de ruimte.')
-        self.say('En terwijl je in het ruimteschip zit, voel je hoe het ruimteschip met je meebeweegt, zacht en langzaam.')
-        self.say('Je hebt alle controle over waar je naartoe wilt, je kunt naar de sterren vliegen of verder weg gaan, het maakt niet uit.')
-        self.say('Voel de rust om je heen, terwijl je door de ruimte zweeft.')
-        self.say('Nu zweef je rustig langs een prachtige planeet die helemaal van kleur is, misschien wel in een fel blauw, of paars, of misschien zie je wel ringen om de planeet heen.')
-        self.say('Jij voelt je veilig en rustig, als een astronaut in je eigen avontuur.')
+        self.say('En terwijl je in het ruimteschip zit, voel je hoe het ruimteschip langzaam met je mee zweeft.')
+        self.say('Jij kunt kiezen waar je naartoe wilt zweven, naar de sterren of verder weg.')
+        self.say('Voel de rust om je heen, terwijl je door de ruimte zweeft')
+        self.say('Kijk, daar is een mooie planeet! Misschien is hij blauw, paars of heeft hij ringen.')
+        self.say('Je voelt je veilig en stoer als een echte astronaut.')
         self.say('Voel maar hoe je lichaam steeds lichter wordt nu je zo lekker in de ruimte zweeft.')
         self.say('Steeds lichter, steeds rustiger, helemaal ontspannen.')
 
@@ -622,4 +625,4 @@ if __name__ == '__main__':
                             google_keyfile_path=abspath(join("..", "conf", "dialogflow", "google_keyfile.json")),
                             openai_key_path=abspath(join("..", "conf", "openai", ".openai_env")),
                             default_speaking_rate=0.8, computer_test_mode=False)
-    droomrobot.run('Tessa', 8)
+    droomrobot.run('Tessa', 5)
